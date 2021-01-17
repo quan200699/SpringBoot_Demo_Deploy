@@ -20,7 +20,7 @@ public class CustomerController {
 
     @GetMapping("/create-customer")
     public ModelAndView showCreateForm() {
-        ModelAndView modelAndView = new ModelAndView("/customer/create");
+        ModelAndView modelAndView = new ModelAndView("/create");
         modelAndView.addObject("customer", new Customer());
         return modelAndView;
     }
@@ -28,7 +28,7 @@ public class CustomerController {
     @PostMapping("/create-customer")
     public ModelAndView saveCustomer(@ModelAttribute("customer") Customer customer) {
         customerService.save(customer);
-        ModelAndView modelAndView = new ModelAndView("/customer/create");
+        ModelAndView modelAndView = new ModelAndView("/create");
         modelAndView.addObject("customer", new Customer());
         modelAndView.addObject("message", "New customer created successfully");
         return modelAndView;
@@ -36,7 +36,7 @@ public class CustomerController {
 
     @GetMapping("/customers")
     public ModelAndView listCustomers() {
-        ModelAndView modelAndView = new ModelAndView("/customer/list");
+        ModelAndView modelAndView = new ModelAndView("/list");
         modelAndView.addObject("customers", customerService.findAll());
         return modelAndView;
     }
@@ -46,7 +46,7 @@ public class CustomerController {
     public ModelAndView showEditForm(@PathVariable Long id) {
         Optional<Customer> customer = customerService.findById(id);
         if (customer.isPresent()) {
-            ModelAndView modelAndView = new ModelAndView("/customer/edit");
+            ModelAndView modelAndView = new ModelAndView("/edit");
             modelAndView.addObject("customer", customer.get());
             return modelAndView;
         } else {
@@ -57,7 +57,7 @@ public class CustomerController {
     @PostMapping("/edit-customer")
     public ModelAndView updateCustomer(@ModelAttribute("customer") Customer customer) {
         customerService.save(customer);
-        ModelAndView modelAndView = new ModelAndView("/customer/edit");
+        ModelAndView modelAndView = new ModelAndView("/edit");
         modelAndView.addObject("customer", customer);
         modelAndView.addObject("message", "Customer updated successfully");
         return modelAndView;
@@ -67,7 +67,7 @@ public class CustomerController {
     public ModelAndView showDeleteForm(@PathVariable Long id) {
         Optional<Customer> customer = customerService.findById(id);
         if (customer.isPresent()) {
-            ModelAndView modelAndView = new ModelAndView("/customer/delete");
+            ModelAndView modelAndView = new ModelAndView("/delete");
             modelAndView.addObject("customer", customer.get());
             return modelAndView;
 
